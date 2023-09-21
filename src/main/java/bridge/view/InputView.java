@@ -2,6 +2,9 @@ package bridge.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static bridge.utils.MessageConst.*;
 import static bridge.utils.NumberConst.BRIDGE_LENGTH_EXCLUSIVE;
 import static bridge.utils.NumberConst.BRIDGE_LENGTH_INCLUSIVE;
@@ -31,12 +34,16 @@ public class InputView {
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
-    public String readMoving() {
-        String moving = Console.readLine();
-        if (!"U".equals(moving) && !"D".equals(moving)) {
-            throw new IllegalArgumentException(MOVING_CHOICE_EXCEPTION);
+    public List<String> readMoving(int size) {
+        ArrayList<String> userMoving = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            String moving = Console.readLine();
+            if (!"U".equals(moving) && !"D".equals(moving)) {
+                throw new IllegalArgumentException(MOVING_CHOICE_EXCEPTION);
+            }
+            userMoving.add(moving);
         }
-        return moving;
+        return userMoving;
     }
 
     /**
