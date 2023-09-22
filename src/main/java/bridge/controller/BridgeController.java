@@ -34,12 +34,10 @@ public class BridgeController {
     public void start() {
         int bridgeSize = getBridgeSize();
         List<String> correctRoute = bridgeMaker.makeBridge(bridgeSize);
-        System.out.println("correctRoute = " + correctRoute);
-
         List<String> userDirections = movePosition(bridgeSize, correctRoute);
         int count = 1;
         while (!userDirections.equals(correctRoute)) {
-            System.out.println(GAME_RESTART_MSG);
+            outputView.printInputRestartOrNotMsg();
             String gameCommand = inputView.readGameCommand();
             if (gameCommand.equals("Q")) {
                 break;
@@ -76,4 +74,6 @@ public class BridgeController {
         }
         return directions;
     }
+
+
 }
