@@ -2,9 +2,6 @@ package bridge.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static bridge.utils.MessageConst.*;
 import static bridge.utils.NumberConst.BRIDGE_LENGTH_EXCLUSIVE;
 import static bridge.utils.NumberConst.BRIDGE_LENGTH_INCLUSIVE;
@@ -24,26 +21,30 @@ public class InputView {
      */
     public int readBridgeSize() {
         outputView.printInputBridgeSizeMsg();
-        int bridgeSize = Integer.parseInt(Console.readLine());
+        String size = Console.readLine();
+        for (int i = 0; i < size.length(); i++) {
+            if (!Character.isDigit(size.charAt(i))) {
+                throw new IllegalArgumentException(BRIDGE_SIZE_EXCEPTION);
+            }
+        }
+        int bridgeSize = Integer.parseInt(size);
         if (bridgeSize < BRIDGE_LENGTH_INCLUSIVE || bridgeSize > BRIDGE_LENGTH_EXCLUSIVE) {
             throw new IllegalArgumentException(BRIDGE_SIZE_EXCEPTION);
         }
+
         return bridgeSize;
     }
 
     /**
      * 사용자가 이동할 칸을 입력받는다.
      */
-    public List<String> readMoving(int size) {
-        ArrayList<String> userMoving = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            String moving = Console.readLine();
-            if (!"U".equals(moving) && !"D".equals(moving)) {
-                throw new IllegalArgumentException(MOVING_CHOICE_EXCEPTION);
-            }
-            userMoving.add(moving);
+    public String readMoving() {
+        outputView.printInputMovePositionMsg();
+        String moving = Console.readLine();
+        if (!"U".equals(moving) && !"D".equals(moving)) {
+            throw new IllegalArgumentException(MOVING_CHOICE_EXCEPTION);
         }
-        return userMoving;
+        return moving;
     }
 
     /**
