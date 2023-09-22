@@ -4,8 +4,6 @@ import bridge.domain.BridgeGame;
 import bridge.domain.BridgeMaker;
 import bridge.domain.MapResult;
 import bridge.utils.BridgeNumberGenerator;
-import bridge.utils.BridgeRandomNumberGenerator;
-import bridge.utils.MessageConst;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 
@@ -37,9 +35,8 @@ public class BridgeController {
         List<String> userDirections = movePosition(bridgeSize, correctRoute);
         int count = 1;
         while (!userDirections.equals(correctRoute)) {
-            outputView.printInputRestartOrNotMsg();
-            String gameCommand = inputView.readGameCommand();
-            if (gameCommand.equals("Q")) {
+            boolean retry = retry();
+            if (!retry) {
                 break;
             }
             count++;
@@ -75,5 +72,16 @@ public class BridgeController {
         return directions;
     }
 
-
+    private boolean retry() {
+        outputView.printInputRestartOrNotMsg();
+        try {
+            String gameCommand = inputView.readGameCommand();
+            if (gameCommand.equals("Q")) {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
 }
