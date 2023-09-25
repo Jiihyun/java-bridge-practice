@@ -7,37 +7,43 @@ import java.util.List;
 
 public class MapResult {
 
-    public String getMapResult(List<String> directions, List<String> correctRoute) {
-        List<String> upperList = new ArrayList<>();
-        List<String> lowerList = new ArrayList<>();
-        for (int i = 0; i < directions.size(); i++) {
-            if (directions.get(i).equals(correctRoute.get(i))) {
-                //directions.get(i)의 방향 U, D에 따라 지도 표시해주기
-                if (directions.get(i).equals("U")) {
-                    upperList.add(i, "O");
-                    lowerList.add(i, " ");
-                }
-                if (directions.get(i).equals("D")) {
-                    lowerList.add(i, "O");
-                    upperList.add(i, " ");
-                }
-            }
-            if (!directions.get(i).equals(correctRoute.get(i))) {
+    List<String> upperList = new ArrayList<>();
+    List<String> lowerList = new ArrayList<>();
 
-                if (directions.get(i).equals("U")) {
-                    upperList.add(i, "X");
-                    lowerList.add(i, " ");
-                }
-                if (directions.get(i).equals("D")) {
-                    lowerList.add(i, "X");
-                    upperList.add(i, " ");
-                }
+    public String getMapResult(List<String> directions, List<String> correctRoute) {
+        for (int i = 0; i < directions.size(); i++) {
+            rightDirection(directions, correctRoute, i);
+            if (wrongDirection(directions, correctRoute, i)) {
                 break;
             }
         }
-
         String upper = String.join(" | ", upperList);
         String lower = String.join(" | ", lowerList);
         return String.format("[ %s ]\n[ %s ]\n", upper, lower);
+    }
+
+    private boolean wrongDirection(List<String> directions, List<String> correctRoute, int i) {
+        if (!directions.get(i).equals(correctRoute.get(i)) && directions.get(i).equals("U")) {
+            upperList.add(i, "X");
+            lowerList.add(i, " ");
+            return true;
+        }
+        if (!directions.get(i).equals(correctRoute.get(i)) && directions.get(i).equals("D")) {
+            lowerList.add(i, "X");
+            upperList.add(i, " ");
+            return true;
+        }
+        return false;
+    }
+
+    private void rightDirection(List<String> directions, List<String> correctRoute, int i) {
+        if (directions.get(i).equals(correctRoute.get(i)) && directions.get(i).equals("U")) {
+            upperList.add(i, "O");
+            lowerList.add(i, " ");
+        }
+        if (directions.get(i).equals(correctRoute.get(i)) && directions.get(i).equals("D")) {
+            lowerList.add(i, "O");
+            upperList.add(i, " ");
+        }
     }
 }
