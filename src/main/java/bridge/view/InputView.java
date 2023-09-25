@@ -22,17 +22,24 @@ public class InputView {
     public int readBridgeSize() {
         outputView.printInputBridgeSizeMsg();
         String size = Console.readLine();
+        checkNumber(size);
+        int bridgeSize = Integer.parseInt(size);
+        checkBridgeSize(bridgeSize);
+        return bridgeSize;
+    }
+
+    private void checkBridgeSize(int bridgeSize) {
+        if (bridgeSize < BRIDGE_LENGTH_INCLUSIVE || bridgeSize > BRIDGE_LENGTH_EXCLUSIVE) {
+            throw new IllegalArgumentException(BRIDGE_SIZE_EXCEPTION);
+        }
+    }
+
+    private void checkNumber(String size) {
         for (int i = 0; i < size.length(); i++) {
             if (!Character.isDigit(size.charAt(i))) {
                 throw new IllegalArgumentException(BRIDGE_SIZE_EXCEPTION);
             }
         }
-        int bridgeSize = Integer.parseInt(size);
-        if (bridgeSize < BRIDGE_LENGTH_INCLUSIVE || bridgeSize > BRIDGE_LENGTH_EXCLUSIVE) {
-            throw new IllegalArgumentException(BRIDGE_SIZE_EXCEPTION);
-        }
-
-        return bridgeSize;
     }
 
     /**
