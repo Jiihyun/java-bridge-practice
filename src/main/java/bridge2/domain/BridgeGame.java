@@ -8,13 +8,18 @@ import java.util.List;
  * 다리 건너기 게임을 관리하는 클래스
  */
 public class BridgeGame {
+    private final BridgeMap bridgeMap;
+    private final MoveRecords moveRecords;
+    private int attemptCount = 1;
 
-    private final BridgeMaker bridgeMaker;
-
-    public BridgeGame(BridgeMaker bridgeMaker) {
-        this.bridgeMaker = bridgeMaker;
+    private BridgeGame(final BridgeMap bridgeMap) {
+        this.bridgeMap = bridgeMap;
+        this.moveRecords = MoveRecords.create();
     }
 
+    public static BridgeGame of(final BridgeMap bridgeMap) {
+        return new BridgeGame(bridgeMap);
+    }
     /**
      * 사용자가 칸을 이동할 때 사용하는 메서드
      * <p>
