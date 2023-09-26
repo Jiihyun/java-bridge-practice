@@ -12,11 +12,11 @@ public enum MovePosition {
 
     public static MovePosition of(final String value) {
         if ("U".equals(value)) {
-            return MovePosition.Up;
+            return MovePosition.UP;
         }
         if ("D".equals(value)) {
             return MovePosition.DOWN;
         }
-        throw new IllegalArgumentException()
+        throw new IllegalArgumentException();
     }
 }
