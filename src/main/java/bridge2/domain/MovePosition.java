@@ -19,4 +19,11 @@ public enum MovePosition {
         }
         throw new IllegalArgumentException();
     }
+
+    public MovePosition getOpposite() {
+        if (UP.equals(this)) {
+            return DOWN;
+        }
+        return UP;
+    }
 }
