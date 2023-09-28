@@ -15,15 +15,13 @@ import static bridge.utils.MessageConst.*;
 public class BridgeController {
     InputView inputView;
     OutputView outputView;
-    BridgeNumberGenerator bridgeNumberGenerator;
     BridgeMaker bridgeMaker;
     BridgeGame bridgeGame;
     MapResult mapResult;
 
-    public BridgeController(InputView inputView, OutputView outputView, BridgeNumberGenerator bridgeNumberGenerator, BridgeMaker bridgeMaker, BridgeGame bridgeGame, MapResult mapResult) {
+    public BridgeController(InputView inputView, OutputView outputView, BridgeMaker bridgeMaker, BridgeGame bridgeGame, MapResult mapResult) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.bridgeNumberGenerator = bridgeNumberGenerator;
         this.bridgeMaker = bridgeMaker;
         this.bridgeGame = bridgeGame;
         this.mapResult = mapResult;
@@ -32,8 +30,8 @@ public class BridgeController {
     public void start() {
         int bridgeSize = getBridgeSize();
         List<String> correctRoute = bridgeMaker.makeBridge(bridgeSize);
-        List<String> userDirections = movePosition(bridgeSize, correctRoute);
-        int count = getCount(bridgeSize, correctRoute, userDirections);
+        List<String> userDirections = movePosition(correctRoute);
+        int count = getCount(correctRoute, userDirections);
         System.out.println(GAME_RESULT_MSG);
         outputView.printMap(mapResult, userDirections, correctRoute);
         outputView.printResult(count, userDirections, correctRoute);
@@ -48,10 +46,10 @@ public class BridgeController {
         }
     }
 
-    private List<String> movePosition(int bridgeSize, List<String> correctRoute) {
+    private List<String> movePosition(List<String> correctRoute) {
         List<String> directions = new ArrayList<>();
         int i = 0;
-        while (directions.size() < bridgeSize) {
+        while (directions.size() < correctRoute.size()) {
             String direction = inputView.readMoving();
             directions.add(direction);
             outputView.printMap(mapResult, directions, correctRoute);
@@ -77,7 +75,7 @@ public class BridgeController {
         return true;
     }
 
-    private int getCount(int bridgeSize, List<String> correctRoute, List<String> userDirections) {
+    private int getCount(List<String> correctRoute, List<String> userDirections) {
         int count = 1;
         while (!userDirections.equals(correctRoute)) {
             boolean retry = retry();
@@ -85,7 +83,7 @@ public class BridgeController {
                 break;
             }
             count++;
-            userDirections = movePosition(bridgeSize, correctRoute);
+            userDirections = movePosition(correctRoute);
         }
         return count;
     }

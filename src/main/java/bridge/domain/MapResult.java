@@ -42,7 +42,7 @@ public class MapResult {
             lowerList.add(i, " ");
         }
         if (directions.get(i).equals(correctRoute.get(i)) && directions.get(i).equals("D")) {
-            lowerList.add(i, "O");
+            lowerList.add(i, "O"); 
             upperList.add(i, " ");
         }
     }

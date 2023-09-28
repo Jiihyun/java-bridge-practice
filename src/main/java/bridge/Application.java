@@ -17,9 +17,9 @@ public class Application {
         InputView inputView = new InputView(outputView);
         BridgeNumberGenerator bridgeNumberGenerator = new BridgeRandomNumberGenerator();
         BridgeMaker bridgeMaker = new BridgeMaker(bridgeNumberGenerator);
-        BridgeGame bridgeGame = new BridgeGame(bridgeMaker);
+        BridgeGame bridgeGame = new BridgeGame();
         MapResult mapResult = new MapResult();
-        BridgeController bridgeController = new BridgeController(inputView,outputView, bridgeNumberGenerator, bridgeMaker, bridgeGame, mapResult);
+        BridgeController bridgeController = new BridgeController(inputView,outputView, bridgeMaker, bridgeGame, mapResult);
         bridgeController.start();
 
     }
