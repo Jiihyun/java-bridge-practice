@@ -3,7 +3,6 @@ package bridge.controller;
 import bridge.domain.BridgeGame;
 import bridge.domain.BridgeMaker;
 import bridge.domain.MapResult;
-import bridge.utils.BridgeNumberGenerator;
 import bridge.view.InputView;
 import bridge.view.OutputView;
 
@@ -33,30 +32,21 @@ public class BridgeController {
         List<String> userDirections = movePosition(correctRoute);
         int count = 1;
         while (!userDirections.equals(correctRoute)) {
-            boolean retry = retry();
-            if (!retry) {
+            boolean willRetry = retry();
+            if (!willRetry) {
                 break;
             }
             count++;
             userDirections = movePosition(correctRoute);
         }
+        printResult(correctRoute, userDirections, count);
+    }
+
+    private void printResult(List<String> correctRoute, List<String> userDirections, int count) {
         System.out.println(GAME_RESULT_MSG);
         outputView.printMap(mapResult, userDirections, correctRoute);
         outputView.printResult(count, userDirections, correctRoute);
     }
-
-//    private int getCount(List<String> correctRoute, List<String> userDirections) {
-//        int count = 1;
-//        while (!userDirections.equals(correctRoute)) {
-//            boolean retry = retry();
-//            if (!retry) {
-//                break;
-//            }
-//            count++;
-//            userDirections = movePosition(correctRoute);
-//        }
-//        return count;
-//    }
 
     private int getBridgeSize() {
         try {
