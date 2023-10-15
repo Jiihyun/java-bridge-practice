@@ -28,6 +28,7 @@ public class BridgeController {
 
     public void start() {
         //imp - start 메서드 내에서 최대한 "입력 | 실행 | 출력"   구분
+        //imp - 34 ~ 42 메서드 추출하려하면 return값이 count와 userDirections 2 개이므로 새로운 클래스가 생성됨
         List<String> correctRoute = readCorrectRoute();
         List<String> userDirections = movePosition(correctRoute);
         int count = 1;
