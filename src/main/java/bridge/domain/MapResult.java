@@ -7,10 +7,12 @@ import java.util.List;
 
 public class MapResult {
 
-    List<String> upperList = new ArrayList<>();
-    List<String> lowerList = new ArrayList<>();
+    List<String> upperList;
+    List<String> lowerList;
 
     public String getMapResult(List<String> directions, List<String> correctRoute) {
+        this.upperList =  new ArrayList<String>();
+        this.lowerList = new ArrayList<String>();
         for (int i = 0; i < directions.size(); i++) {
             rightDirection(directions, correctRoute, i);
             if (wrongDirection(directions, correctRoute, i)) {
@@ -42,7 +44,7 @@ public class MapResult {
             lowerList.add(i, " ");
         }
         if (directions.get(i).equals(correctRoute.get(i)) && directions.get(i).equals("D")) {
-            lowerList.add(i, "O"); 
+            lowerList.add(i, "O");
             upperList.add(i, " ");
         }
     }

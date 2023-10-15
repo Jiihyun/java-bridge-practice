@@ -31,11 +31,32 @@ public class BridgeController {
         int bridgeSize = getBridgeSize();
         List<String> correctRoute = bridgeMaker.makeBridge(bridgeSize);
         List<String> userDirections = movePosition(correctRoute);
-        int count = getCount(correctRoute, userDirections);
+        int count = 1;
+        while (!userDirections.equals(correctRoute)) {
+            boolean retry = retry();
+            if (!retry) {
+                break;
+            }
+            count++;
+            userDirections = movePosition(correctRoute);
+        }
         System.out.println(GAME_RESULT_MSG);
         outputView.printMap(mapResult, userDirections, correctRoute);
         outputView.printResult(count, userDirections, correctRoute);
     }
+
+//    private int getCount(List<String> correctRoute, List<String> userDirections) {
+//        int count = 1;
+//        while (!userDirections.equals(correctRoute)) {
+//            boolean retry = retry();
+//            if (!retry) {
+//                break;
+//            }
+//            count++;
+//            userDirections = movePosition(correctRoute);
+//        }
+//        return count;
+//    }
 
     private int getBridgeSize() {
         try {
@@ -75,16 +96,4 @@ public class BridgeController {
         return true;
     }
 
-    private int getCount(List<String> correctRoute, List<String> userDirections) {
-        int count = 1;
-        while (!userDirections.equals(correctRoute)) {
-            boolean retry = retry();
-            if (!retry) {
-                break;
-            }
-            count++;
-            userDirections = movePosition(correctRoute);
-        }
-        return count;
-    }
 }
