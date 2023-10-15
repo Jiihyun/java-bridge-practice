@@ -27,8 +27,8 @@ public class BridgeController {
     }
 
     public void start() {
-        int bridgeSize = getBridgeSize();
-        List<String> correctRoute = bridgeMaker.makeBridge(bridgeSize);
+        //imp - start 메서드 내에서 최대한 "입력 | 실행 | 출력"   구분
+        List<String> correctRoute = readCorrectRoute();
         List<String> userDirections = movePosition(correctRoute);
         int count = 1;
         while (!userDirections.equals(correctRoute)) {
@@ -40,6 +40,12 @@ public class BridgeController {
             userDirections = movePosition(correctRoute);
         }
         printResult(correctRoute, userDirections, count);
+    }
+
+    private List<String> readCorrectRoute() {
+        int bridgeSize = getBridgeSize();
+        List<String> correctRoute = bridgeMaker.makeBridge(bridgeSize);
+        return correctRoute;
     }
 
     private void printResult(List<String> correctRoute, List<String> userDirections, int count) {
