@@ -9,16 +9,12 @@
 
 ### bridgeMaker
 
-- 사이즈 받아서 스트링 리스트인 다리 정답 만들기 []
+- 사이즈 받아서 스트링 리스트인 다리 정답 만들기 [o]
 
 ### bridgeResult
 
 - 시도한 횟수 []
 - 게임 성공 여부 (성공 못하고 Q할시 실패) []
-
-### BridgeRandomNumberGenerator
-
--generate() : 0 or 1 랜덤 값 추출 (0이면 아래칸(D), 1이면 위 칸(U)으로 이동) []
 
 ### inputView
 
