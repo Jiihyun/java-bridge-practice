@@ -36,7 +36,16 @@ public class InputView {
     }
 
     public String readMoving() {
-        return null;
+        outputView.printInputMovingMsg();
+        String moving = readConsole();
+        validateBridgeDirectionInputFormat(moving);
+        return moving;
+    }
+
+    private static void validateBridgeDirectionInputFormat(String moving) {
+        if (!moving.equals("U") && !moving.equals("D")) {
+            throw new IllegalArgumentException(BRIDGE_DIRECTION_INPUTT_EXCEPTION);
+        }
     }
 
     public String readGameCommand() {

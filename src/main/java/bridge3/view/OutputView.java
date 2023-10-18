@@ -18,4 +18,8 @@ public class OutputView {
     public void printInputBridgeLengthMsg() {
         System.out.println(BRIDGE_LENGTH_INPUT_MSG);
     }
+
+    public void printInputMovingMsg() {
+        System.out.println(BRIDGE_DIRECTION_INPUT_MSG);
+    }
 }

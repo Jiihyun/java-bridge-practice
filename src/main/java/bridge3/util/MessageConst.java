@@ -8,4 +8,5 @@ public class MessageConst {
     public static final String GAME_RESULT_MSG = "최종 게임 결과\n";
     public static final String BRIDGE_SIZE_EXCEPTION = "[ERROR] 3이상 20이하로 입력 가능합니다.";
     public static final String BRIDGE_SIZE_WRONG_FORMAT_EXCEPTION ="[ERROR] 3 ~ 20 숫자만 입력 가능합니다.";
+    public static final String BRIDGE_DIRECTION_INPUTT_EXCEPTION ="[ERROR] U 혹은 D 만 입력 가능합니다.";
 }

@@ -18,9 +18,10 @@ public class MainController {
     }
 
     public void start() {
-        //입력
+        //입력 ✅
         makeBridgeRoute();
         //실행 (이동할 칸 선택 후 출력 / 틀리면 retry or not)
+        String moving = inputView.readMoving();
         //결과 출력 (최종 게임 결과 출력, 게임 성공여부 & 총 시도 횟수 출력)
     }
 
